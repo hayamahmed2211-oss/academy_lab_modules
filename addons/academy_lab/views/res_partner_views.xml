@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="res_partner_form_academy" model="ir.ui.view">
+        <field name="name">res.partner.form.academy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <notebook position="inside">
+                <page string="Academy">
+                    <group>
+                        <field name="is_student"/>
+                        <field name="is_instructor"/>
+                    </group>
+
+                    <div class="oe_button_box">
+                        <button class="oe_stat_button" type="action"
+                                name="%(academy_lab.academy_enrollment_action)d"
+                                icon="fa-book">
+                            <field name="total_courses_enrolled"
+                                   widget="statinfo"
+                                   string="Enrolled"/>
+                        </button>
+
+                        <button class="oe_stat_button" type="action"
+                                name="%(academy_lab.academy_course_action)d"
+                                icon="fa-chalkboard">
+                            <field name="total_courses_teaching"
+                                   widget="statinfo"
+                                   string="Teaching"/>
+                        </button>
+                    </div>
+                </page>
+            </notebook>
+
+        </field>
+    </record>
+
+</odoo>
