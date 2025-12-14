@@ -1,7 +1,13 @@
 <odoo>
-    <menuitem id="academy_root_menu" name="Academy"/>
+    <menuitem id="academy_root_menu" name="Academy" sequence="10"/>
     <menuitem id="academy_course_menu"
               name="Courses"
               parent="academy_root_menu"
-              action="academy_course_action"/>
+              action="academy_course_action"/
+    >
+
+    <menuitem id="academy_enrollment_menu"
+              name="Enrollments"
+              parent="academy_root_menu"
+              action="academy_enrollment_action"/>
 </odoo>
