@@ -1,0 +1,112 @@
+<odoo>
+  
+    <record_id="academy_course_list" model="ir.ui.view">
+        <field_name="name">academy.course.list</field>
+        <field_name="course">academy.course</field>
+        <field_name="arch" type="xml">
+            <list
+             decoration-success="state== 'published'"
+             decoration-warning="is_full"
+             decoration-danger="state== 'cancelled'">
+
+             <field name="name"/>
+             <field name="code"/>
+             <field name="category_id"/>
+             <field name="instructor_id"/>
+             <field name="enrolled_count"/>
+             <field name="available_seats"/>
+             <field name="state"/>
+            <list/>
+        <field/>
+    <record/>
+
+    <record id="academy_course_form" model="ir.ui.view">
+        <field name="name">academy.course.form</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_publish" type="object"
+                            string="Publish" states="draft"/>
+                    <button name="action_start" type="object"
+                            string="Start" states="published"/>
+                    <button name="action_complete" type="object"
+                            string="Complete" states="in_progress"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel" states="draft,published,in_progress"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,published,in_progress,done,cancelled"/>
+                </header>
+
+                <sheet>
+                    
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" class="oe_stat_button"
+                                icon="fa-users"
+                                name="%(academy_lab.action_enrollments)d">
+                            <field name="enrolled_count" widget="statinfo"
+                                   string="Enrollments"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="category_id"/>
+                            <field name="instructor_id"/>
+                        </group>
+                        <group>
+                            <field name="max_students"/>
+                            <field name="enrolled_count" readonly="1"/>
+                            <field name="available_seats" readonly="1"/>
+                            <field name="is_full" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="duration_hours"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Enrollments">
+                            <field name="enrollment_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="academy_course_search" model="ir.ui.view">
+        <field name="name">academy.course.search</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="state"/>
+                <filter string="Published" domain="[('state','=','published')]"/>
+                <filter string="Full" domain="[('is_full','=',True)]"/>
+            </search>
+        </field>
+    </record>
+
+    
+    <record id="academy_course_action" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">academy.course</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+</odoo>
+        
