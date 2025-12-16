@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Create a category first -->
+    <record id="module_category_academy" model="ir.module.category">
+        <field name="name">Academy</field>
+        <field name="description">Academy Management System</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <!-- Student Group -->
+    <record id="academy_group_student" model="res.groups">
+        <field name="name">Student</field>
+        <field name="category_id" ref="module_category_academy"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>  <!-- Optional: Add admin to group -->
+    </record>
+
+    <!-- Instructor Group -->
+    <record id="academy_group_instructor" model="res.groups">
+        <field name="name">Instructor</field>
+        <field name="category_id" ref="module_category_academy"/>
+        <!-- For implied groups in Odoo 18, use implied_group -->
+        <field name="implied_ids" eval="[(4, ref('academy_group_student'))]"/>
+    </record>
+
+    <!-- Manager Group -->
+    <record id="academy_group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_academy"/>
+        <field name="implied_ids" eval="[(4, ref('academy_group_instructor'))]"/>
+    </record>
+</odoo>

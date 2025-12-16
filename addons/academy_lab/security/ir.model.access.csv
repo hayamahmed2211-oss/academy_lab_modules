@@ -1,2 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_academy_course_all,academy.course all,model_academy_course,,1,1,1,1
+access_academy_enrollment_all,academy.enrollment all,model_academy_enrollment,,1,1,1,1
+access_academy_category_all,academy.category all,model_academy_course_category,,1,1,1,1
+access_academy_course_category,academy.course.category,model_academy_course_category,,1,1,1,1
+access_academy_course,academy.course,model_academy_course,,1,1,1,1
+access_academy_enrollment,academy.enrollment,model_academy_enrollment,,1,1,1,1

@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 class AcademyEnrollment(models.Model):
     _name = 'academy.enrollment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-
+    _description = 'Academy Enrollment' 
     student_id = fields.Many2one('res.partner', required=True)
     course_id = fields.Many2one('academy.course', required=True)
     enrollment_date = fields.Date(default=fields.Date.today)

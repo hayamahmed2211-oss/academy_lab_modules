@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
     <!-- ENROLLMENT LIST -->
@@ -23,12 +24,18 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <!-- FIXED ATTRS SYNTAX -->
                     <button name="action_confirm" type="object"
-                            string="Confirm" states="draft"/>
+                            string="Confirm"
+                            invisible="state != 'draft'"/>
+                
                     <button name="action_complete" type="object"
-                            string="Complete" states="confirmed"/>
+                            string="Complete"
+                            invisible="state != 'confirmed'"/>
+                
                     <button name="action_cancel" type="object"
-                            string="Cancel" states="draft,confirmed"/>
+                            string="Cancel"
+                            invisible="state in ['completed', 'cancelled']"/>
 
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,confirmed,completed,cancelled"/>
@@ -55,7 +62,8 @@
         </field>
     </record>
 
-    <!-- SEARCH -->
+    <!-- SEARCH - TEMPORARILY COMMENTED -->
+    
     <record id="academy_enrollment_search" model="ir.ui.view">
         <field name="name">academy.enrollment.search</field>
         <field name="model">academy.enrollment</field>
@@ -70,6 +78,7 @@
             </search>
         </field>
     </record>
+    
 
     <!-- ACTION -->
     <record id="academy_enrollment_action" model="ir.actions.act_window">

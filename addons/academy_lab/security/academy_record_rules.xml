@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Students: published courses only -->
+    <record id="rule_student_courses" model="ir.rule">
+        <field name="name">Student Published Courses</field>
+        <field name="model_id" ref="model_academy_course"/>
+        <field name="groups" eval="[(4, ref('academy_group_student'))]"/>
+        <field name="domain_force">[('state','=','published')]</field>
+    </record>
+
+    <!-- Students: own enrollments -->
+    <record id="rule_student_enrollments" model="ir.rule">
+        <field name="name">Student Own Enrollments</field>
+        <field name="model_id" ref="model_academy_enrollment"/>
+        <field name="groups" eval="[(4, ref('academy_group_student'))]"/>
+        <field name="domain_force">[('student_id','=',user.partner_id.id)]</field>
+    </record>
+
+    <!-- Instructors: read enrollments -->
+    <record id="rule_instructor_enrollments" model="ir.rule">
+        <field name="name">Instructor Read Enrollments</field>
+        <field name="model_id" ref="model_academy_enrollment"/>
+        <field name="groups" eval="[(4, ref('academy_group_instructor'))]"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
